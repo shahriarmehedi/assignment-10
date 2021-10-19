@@ -6,12 +6,14 @@ import initializeAuthentication from "../firebase/firebase.init";
 initializeAuthentication();
 const useFirebase = () => {
     const [user, setUser] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
     const auth = getAuth();
     const googleProvider = new GoogleAuthProvider();
 
     ///////// GOOGLE SIGN IN POPUP //////////
     const signInUsingGoogle = () => {
+        setIsLoading(true);
         signInWithPopup(auth, googleProvider)
             .then(result => {
                 setUser(result.user);
@@ -20,28 +22,35 @@ const useFirebase = () => {
                 ////////// SET ERROR //////////
             }).catch(error => {
                 setError(error.message)
-            })
+            }).finally(() => setIsLoading(false));
     }
     ////////// USER LOG OUT //////////
     const logOut = () => {
+        setIsLoading(true);
         signOut(auth)
             .then(() => {
                 setUser({});
-            })
+            }).finally(() => setIsLoading(false))
     }
     /////// OBSERVE WHEATHER AUTH STATE CHANGED OR NOT ///////
 
     useEffect(() => {
-        onAuthStateChanged(auth, user => {
+        const unsubscribed = onAuthStateChanged(auth, user => {
             if (user) {
                 console.log('inside state changed', user);
                 setUser(user);
             }
-        })
+            else {
+                setUser({})
+            }
+            setIsLoading(false);
+        });
+        return () => unsubscribed;
     }, [])
 
     return {
         signInUsingGoogle,
+        isLoading,
         user,
         error,
         logOut

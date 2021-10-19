@@ -2,27 +2,37 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../hooks/useAuth';
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 
 const SignUp = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
     const { signInUsingGoogle } = useAuth();
     const handleSignup = e => {
+        const auth = getAuth();
         e.preventDefault();
         console.log(email, password);
         if (password.length < 6) {
             setError('Password has to be at least 6 characters long')
             return
         }
-        const auth = getAuth();
+
+        const setUserName = () => {
+            updateProfile(auth.currentUser, { displayName: name }).then(result => {
+
+            })
+        }
+
         createUserWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
+                setError('')
+                setUserName();
                 console.log(user);
             }).catch(error => {
                 const errorMessage = error.message;
@@ -30,12 +40,16 @@ const SignUp = () => {
             })
         setError('')
         setSuccess('User Successfully Registered !!!')
+
     }
     const handleEmailChange = e => {
         setEmail(e.target.value);
     }
     const handlePasswordChange = e => {
         setPassword(e.target.value);
+    }
+    const handleNameChange = e => {
+        setName(e.target.value);
     }
 
 
@@ -48,6 +62,10 @@ const SignUp = () => {
             <div className="w-5/6 md:w-1/2 lg:w-1/3 mx-auto py-16 bg-gray-800 rounded-box">
                 <form onSubmit={handleSignup}>
                     <div className="form-control w-5/6 md:w-2/3 mx-auto ">
+                        <label className="label">
+                            <span className="label-text text-white">Your Name</span>
+                        </label>
+                        <input onBlur={handleNameChange} required type="text" placeholder="Type your Name" className="input text-gray-900 text-lg" />
                         <label className="label">
                             <span className="label-text text-white">Email</span>
                         </label>

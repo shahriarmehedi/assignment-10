@@ -62,7 +62,7 @@ const Footer = () => {
                             <img src="https://i.ibb.co/vDh3p64/gynmesia-logo2.png" alt="" />
 
                         </a>
-                        <p className="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2021 MetroCoder —
+                        <p className="text-sm text-gray-400 sm:ml-6 sm:mt-0 mt-4">© 2021 Gymnesia —
                             <a href="https://www.linkedin.com/in/shahriarmehedi/" className="text-gray-500 ml-1" target="_blank" rel="noopener noreferrer">@Md. Shahriar Mehedi</a>
                         </p>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

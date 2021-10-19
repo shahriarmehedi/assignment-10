@@ -48,7 +48,7 @@ const Header = () => {
 
     return (
         <div>
-            <nav className=" bg-gray-900 text-white mx-auto overflow-x-hidden">
+            <nav className=" bg-gray-800 text-white mx-auto overflow-x-hidden">
                 <ul className="flex justify-between my-5 items-center">
                     <li className="px-10 lg:pl-20 py-3 text-2xl font-bold"><a href="/"><img src="https://i.ibb.co/vDh3p64/gynmesia-logo2.png" alt="" /></a></li>
                     <li onClick={() => setShowmenu(!showmenu)} className="md:hidden text-2xl px-5"><i className="fas fa-bars"></i>
