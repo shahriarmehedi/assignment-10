@@ -38,7 +38,7 @@ const SignUp = () => {
                 toast.success('User Successfully Registered & Signed In')
                 setTimeout(() => {
                     window.location.href = "https://shahriar-gymnesia.web.app/";
-                }, 3000)
+                }, 2000)
             }).catch(error => {
                 const errorMessage = error.message;
                 setError(errorMessage);
@@ -93,7 +93,7 @@ const SignUp = () => {
             </div>
             <ToastContainer
                 position="top-center"
-                autoClose={3000} />
+                autoClose={2000} />
         </motion.div>
     );
 };

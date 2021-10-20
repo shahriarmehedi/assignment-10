@@ -23,7 +23,7 @@ const useFirebase = () => {
                 toast.success('User Successfully Signed In via Google')
                 setTimeout(() => {
                     window.location.href = "https://shahriar-gymnesia.web.app/";
-                }, 3000)
+                }, 2000)
                 ////////// SET ERROR //////////
             }).catch(error => {
                 setError(error.message)
@@ -38,7 +38,7 @@ const useFirebase = () => {
                 toast.success('User Successfully Logged Out')
                 setTimeout(() => {
                     window.location.href = "https://shahriar-gymnesia.web.app/";
-                }, 3000)
+                }, 2000)
             }).finally(() => setIsLoading(false))
     }
     /////// OBSERVE WHEATHER AUTH STATE CHANGED OR NOT ///////

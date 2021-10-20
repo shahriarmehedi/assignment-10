@@ -14,7 +14,7 @@ const Header = () => {
     let menu
     if (showmenu) {
         menu =
-            <div className="fixed bg-gray-900 top-0 left-0 w-4/5 h-full transition duration-500 shadow z-50">
+            <div className="fixed bg-gray-800 top-0 left-0 w-4/5 h-full transition duration-500 shadow z-50">
                 <h1 className="pt-10"><NavLink to="/home" activeStyle={{
                     fontWeight: "bold",
                     color: "#34D399"
@@ -31,7 +31,7 @@ const Header = () => {
                     fontWeight: "bold",
                     color: "#34D399"
                 }}><button className="py-3 ">CONTACT</button></NavLink></h1>
-                <h1 className="pt-10">{user?.displayName ? <><h3 className=" user-name text-xl font-bold">Hello, {user?.displayName}</h3></> : <NavLink to="/login" activeStyle={{
+                <h1 className="pt-10">{user?.displayName ? <><h3 className=" user-name text-xl font-bold">{user?.displayName}</h3></> : <NavLink to="/login" activeStyle={{
                     fontWeight: "bold",
                     color: "#34D399"
                 }}><button className="py-3 ">LOGIN</button></NavLink>}</h1>
@@ -48,9 +48,10 @@ const Header = () => {
 
     return (
         <div>
-            <nav className=" bg-gray-800 text-white mx-auto overflow-x-hidden">
+            <nav className=" custom-bg text-white mx-auto overflow-x-hidden">
                 <ul className="flex justify-between my-5 items-center">
                     <li className="px-10 lg:pl-20 py-3 text-2xl font-bold"><a href="/"><img src="https://i.ibb.co/vDh3p64/gynmesia-logo2.png" alt="" /></a></li>
+                    <li className="md:hidden relative left-10">{user?.displayName && <img className="user-photo" src={user?.photoURL} alt="" />}</li>
                     <li onClick={() => setShowmenu(!showmenu)} className="md:hidden text-2xl px-5"><i className="fas fa-bars"></i>
                         {menu}</li>
                     <div className="hidden md:flex">

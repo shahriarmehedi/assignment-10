@@ -8,9 +8,9 @@ const About = () => {
             exit={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             initial={{ opacity: 0 }}
-            className="custom-bg text-white">
+            className="bg-gray-900 text-white">
             <h1 className="pt-10 text-center text-3xl font-bold text-green-400">ABOUT US</h1>
-            <section className="text-gray-400 custom-bg body-font">
+            <section className="text-gray-400 bg-gray-900 body-font">
                 <div className="container px-5 py-24 mx-auto flex flex-wrap">
                     <div className="lg:w-1/2 w-full mb-10 lg:mb-0 rounded-lg overflow-hidden">
                         <img alt="feature" className="object-cover object-center h-full w-full" src="https://i.ibb.co/xhP7hDp/about-img.png" />

@@ -1,9 +1,10 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './Hero.css'
 
 const Hero = () => {
     return (
-        <div className="bg-gray-900 text-white">
+        <div className="custom-bg2 text-white">
             <section className="container mx-auto text-left px-10 py-40">
                 <div className="flex items-center justify-between flex-col lg:flex-row">
                     <div>

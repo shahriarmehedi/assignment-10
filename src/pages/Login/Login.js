@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router';
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../hooks/useAuth';
@@ -15,6 +16,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+
     const handleSignIn = e => {
         e.preventDefault();
         console.log(email, password);
@@ -27,7 +29,7 @@ const Login = () => {
                 toast.success('User Successfully Logged In !!!');
                 setTimeout(() => {
                     window.location.href = "https://shahriar-gymnesia.web.app/";
-                }, 3000)
+                }, 2000)
             }).catch(error => {
                 const errorMessage = error.message;
                 setError(() => {
@@ -37,6 +39,9 @@ const Login = () => {
         setError('');
         setSuccess('');
     }
+    const location = useLocation();
+    console.log(location);
+
     const handleEmailChange = e => {
         setEmail(e.target.value);
     }
@@ -79,7 +84,7 @@ const Login = () => {
             </div>
             <ToastContainer
                 position="top-center"
-                autoClose={3000}
+                autoClose={2000}
             />
         </motion.div>
     );

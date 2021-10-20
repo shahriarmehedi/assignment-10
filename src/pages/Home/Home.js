@@ -17,7 +17,7 @@ const Home = () => {
             <Services></Services>
             <ToastContainer
                 position="top-center"
-                autoClose={3000}
+                autoClose={2000}
             />
         </motion.div>
     );
