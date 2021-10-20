@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../hooks/useAuth';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
+
+    const { signInUsingGoogle } = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -14,22 +18,21 @@ const Login = () => {
     const handleSignIn = e => {
         e.preventDefault();
         console.log(email, password);
-        if (password.length < 6) {
-            setError('Password has to be at least 6 characters long')
-            return
-        }
+
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast.success('User Successfully Logged In !!!');
             }).catch(error => {
                 const errorMessage = error.message;
-                setError(errorMessage);
+                setError(() => {
+                    toast.error(errorMessage);
+                });
             })
-        setError('')
-        setSuccess('User Successfully Logged In !!!')
-        setError('')
+        setError('');
+        setSuccess('');
     }
     const handleEmailChange = e => {
         setEmail(e.target.value);
@@ -37,8 +40,6 @@ const Login = () => {
     const handlePasswordChange = e => {
         setPassword(e.target.value);
     }
-
-    const { signInUsingGoogle } = useAuth();
 
     return (
         <motion.div className="bg-gray-900 text-white pb-32"
@@ -52,18 +53,18 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text text-white">Email</span>
                         </label>
-                        <input onBlur={handleEmailChange} type="email" placeholder="Type your email" className="input text-gray-900 text-lg" />
+                        <input onBlur={handleEmailChange} required type="email" placeholder="Type your email" className="input text-gray-900 text-lg" />
                         <label className="label">
                             <span className="label-text text-white">Password</span>
                         </label>
-                        <input onBlur={handlePasswordChange} type="password" placeholder="Type your password" className="input text-gray-900 text-lg" />
+                        <input onBlur={handlePasswordChange} required type="password" placeholder="Type your password" className="input text-gray-900 text-lg" />
                         <br /><br />
                         <input type="submit" value="LOGIN" className=" btn bg-green-500 hover:bg-green-700 text-white border-none" />
                         <br />
                         <div className="text-red-500 pb-5">
                             {error}
                         </div>
-                        <div className="text-green-400 text-xl font-bold pb-5">
+                        <div>
                             {success}
                         </div>
                         <h2>Need Account? <NavLink className="text-green-300" to="/signup">Click to Signup</NavLink></h2>
@@ -73,6 +74,10 @@ const Login = () => {
                     </div>
                 </form>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+            />
         </motion.div>
     );
 };

@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import useAuth from '../../hooks/useAuth';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
 
@@ -10,7 +12,6 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
 
     const { signInUsingGoogle } = useAuth();
     const handleSignup = e => {
@@ -34,12 +35,13 @@ const SignUp = () => {
                 setError('')
                 setUserName();
                 console.log(user);
+                toast.success('User Successfully Registered & Signed In')
+                window.location.reload();
             }).catch(error => {
                 const errorMessage = error.message;
                 setError(errorMessage);
             })
         setError('')
-        setSuccess('User Successfully Registered !!!')
 
     }
     const handleEmailChange = e => {
@@ -80,9 +82,6 @@ const SignUp = () => {
                         <div className="text-red-500 pb-5">
                             {error}
                         </div>
-                        <div className="text-green-400 text-xl font-bold pb-5">
-                            {success}
-                        </div>
                         <h2>Have an Account? <NavLink to="/login" className="text-green-300">Click to Login</NavLink></h2>
                         <br />
                         <button onClick={signInUsingGoogle} className=" btn bg-gray-50 hover:bg-gray-200 text-gray-500 border-none">
@@ -90,6 +89,9 @@ const SignUp = () => {
                     </div>
                 </form>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000} />
         </motion.div>
     );
 };

@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
 import initializeAuthentication from "../firebase/firebase.init";
+import { toast } from 'react-toastify';
 
 initializeAuthentication();
 const useFirebase = () => {
@@ -18,7 +19,8 @@ const useFirebase = () => {
             .then(result => {
                 setUser(result.user);
                 console.log(result.user);
-
+                // eslint-disable-next-line no-unused-expressions
+                toast.success('User Successfully Signed In via Google')
                 ////////// SET ERROR //////////
             }).catch(error => {
                 setError(error.message)
@@ -30,6 +32,7 @@ const useFirebase = () => {
         signOut(auth)
             .then(() => {
                 setUser({});
+                toast.success('User Successfully Logged Out')
             }).finally(() => setIsLoading(false))
     }
     /////// OBSERVE WHEATHER AUTH STATE CHANGED OR NOT ///////
