@@ -2,6 +2,9 @@ import React from 'react';
 import Hero from './Hero';
 import Services from './Services';
 import { motion } from 'framer-motion';
+import { ToastContainer } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Home = () => {
     return (
@@ -12,6 +15,10 @@ const Home = () => {
         >
             <Hero></Hero>
             <Services></Services>
+            <ToastContainer
+                position="top-center"
+                autoClose={3000}
+            />
         </motion.div>
     );
 };

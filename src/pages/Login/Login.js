@@ -25,6 +25,9 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success('User Successfully Logged In !!!');
+                setTimeout(() => {
+                    window.location.href = "https://shahriar-gymnesia.web.app/";
+                }, 3000)
             }).catch(error => {
                 const errorMessage = error.message;
                 setError(() => {

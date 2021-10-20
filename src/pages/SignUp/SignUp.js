@@ -36,7 +36,9 @@ const SignUp = () => {
                 setUserName();
                 console.log(user);
                 toast.success('User Successfully Registered & Signed In')
-                window.location.reload();
+                setTimeout(() => {
+                    window.location.href = "https://shahriar-gymnesia.web.app/";
+                }, 3000)
             }).catch(error => {
                 const errorMessage = error.message;
                 setError(errorMessage);
